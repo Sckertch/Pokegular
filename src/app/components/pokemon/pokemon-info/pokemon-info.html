@@ -1,0 +1,15 @@
+<div class="">
+  <h1>Pokémons</h1>
+
+      <div class="card">
+        <img src="{{pokemon()?.image}}" alt="{{pokemon()?.name}}">
+        <h1>{{pokemon()?.name}}</h1>
+        <p>{{pokemon()?.description}}</p>
+        @for (type of pokemon()?.types; track type){
+            {{ type.name }}
+        }
+      </div>
+
+  <a routerLink="/pokemon/{{pokemon()?._id}}/edit">Modifier</a>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="">
+  <h1>Modifier un Pokémon</h1>
+
+  <form [formGroup]="pokeFormUpdate" (ngSubmit)="onSubmit()" #pokemonForm="ngForm" class="card">
+
+    <!-- Image actuelle -->
+    <img [src]="pokemon()?.image" [alt]="pokemon()?.name">
+
+    <!-- Nom -->
+    <label for="name">Nom</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      [value]="pokemon()?.name"
+      formControlName="name"
+      required
+    />
+
+    <!-- URL de l'image -->
+    <label for="image">URL de l'image</label>
+    <input
+      id="image"
+      name="image"
+      type="text"
+      [value]="pokemon()?.image"
+      formControlName="image"
+    />
+
+    <!-- Description -->
+    <label for="description">Description</label>
+    <input
+      id="description"
+      name="description"
+      [value]="pokemon()?.description"
+      formControlName="description"
+    />
+
+    <button type="submit">
+      Enregistrer les modifications
+    </button>
+  </form>
+</div>

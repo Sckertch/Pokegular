@@ -1,0 +1,19 @@
+<div class="">
+  <h1>Pokémons</h1>
+
+  @if(pokemons().length > 0){
+    @for (pokemon of pokemons(); track pokemon._id) {
+      <button>
+        <a routerLink="/pokemon/{{pokemon._id}}">
+          <div class="card">
+            <img src="{{pokemon.image}}" alt="{{pokemon.name}}">
+            <h1>{{pokemon.name}}</h1>
+          </div>
+        </a>
+      </button>
+
+    }
+  } @else {
+    <p>Aucun pokémon</p>
+  }
+</div>
