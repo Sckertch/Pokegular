@@ -1,216 +1,288 @@
-// === VARIABLES ===
-$azure-50:  #f0f9ff;
-$azure-100: #e0f2fe;
-$azure-200: #bae6fd;
-$azure-300: #7dd3fc;
-$azure-400: #38bdf8;
-$azure-500: #0ea5e9;
-$azure-600: #0284c7;
-$azure-700: #0369a1;
-$azure-800: #075985;
-$azure-900: #0c4a6e;
+// Variables
+$primary-color: #ef5350;
+$primary-dark: #c62828;
+$secondary-color: #ff9800;
+$text-color: #333;
+$border-color: #e0e0e0;
+$background-light: #f5f5f5;
+$shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 12px;
+$transition: all 0.3s ease;
 
-$white:         #ffffff;
-$text-dark:     #0c4a6e;
-$text-muted:    #38bdf8;
-$radius-sm:     0.375rem;
-$radius-md:     0.5rem;
-$radius-lg:     0.75rem;
-$radius-xl:     1rem;
-$radius-full:   9999px;
-
-$shadow-soft:
-  0 1px 3px rgba(12, 74, 110, 0.1),
-  0 8px 24px rgba(12, 74, 110, 0.15);
-
-$shadow-card:
-  0 2px 6px rgba(12, 74, 110, 0.12),
-  0 16px 40px rgba(12, 74, 110, 0.18);
-
-$transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
-
-// === HOST ===
-:host {
-  display: block;
-  min-height: 100vh;
-  font-family: 'Satoshi', 'Inter', sans-serif;
-}
-
-// === PAGE WRAPPER ===
+// Container principal
 div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 2.5rem 1rem 4rem;
-
-  background:
-    radial-gradient(ellipse at 20% 10%, rgba(186, 230, 253, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 90%, rgba(14, 165, 233, 0.2) 0%, transparent 55%),
-    linear-gradient(160deg, #0c4a6e 0%, #0369a1 35%, #0ea5e9 70%, #7dd3fc 100%);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-// === PAGE TITLE ===
 h1 {
-  font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-  font-weight: 700;
-  color: $white;
-  margin-bottom: 2rem;
-  letter-spacing: -0.02em;
+  color: $primary-dark;
   text-align: center;
-  text-shadow: 0 2px 12px rgba(12, 74, 110, 0.4);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 600;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: $primary-color;
+    border-radius: 2px;
+  }
 }
 
-// === CARD (formulaire) ===
+// Formulaire
 .card {
+  background: white;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  padding: 30px;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Image actuelle
+img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 0 auto 30px auto;
+  border-radius: 50%;
+  background: $background-light;
+  border: 3px solid $primary-color;
+  padding: 10px;
+  transition: $transition;
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: $secondary-color;
+  }
+}
+
+// Labels
+label {
+  display: block;
+  color: $text-color;
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Inputs
+input {
   width: 100%;
-  max-width: 480px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(186, 230, 253, 0.6);
-  border-radius: $radius-xl;
-  padding: 2rem;
-  box-shadow: $shadow-card;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 2px solid $border-color;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: $transition;
+  box-sizing: border-box;
 
-  // === IMAGE POKÉMON ===
-  img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    border-radius: $radius-full;
-    background: linear-gradient(135deg, $azure-100, $azure-200);
-    border: 3px solid $azure-300;
-    padding: 0.5rem;
-    box-shadow: 0 4px 16px rgba(14, 165, 233, 0.25);
-    transition: transform $transition, box-shadow $transition;
-
-    &:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
-    }
-  }
-
-  // === GROUPES label + input ===
-  label {
-    display: block;
-    width: 100%;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: $azure-700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 0.35rem;
-  }
-
-  // Wrapper pour chaque champ
-  .field {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 0.65rem 0.875rem;
-    font-size: 1rem;
-    color: $text-dark;
-    background: $azure-50;
-    border: 1.5px solid $azure-200;
-    border-radius: $radius-md;
+  &:focus {
     outline: none;
-    transition:
-      border-color $transition,
-      background $transition,
-      box-shadow $transition;
-    resize: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.1);
+  }
 
-    &::placeholder {
-      color: $azure-300;
-      font-style: italic;
-    }
+  &:hover:not(:focus) {
+    border-color: $secondary-color;
+  }
+
+  // Validation states
+  &.ng-invalid.ng-touched {
+    border-color: #f44336;
 
     &:focus {
-      border-color: $azure-500;
-      background: $white;
-      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.18);
-    }
-
-    &.ng-invalid.ng-touched {
-      border-color: #e11d48;
-      background: #fff1f2;
-      box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12);
-    }
-
-    &.ng-valid.ng-touched {
-      border-color: #16a34a;
-      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
-    }
-  }
-
-  textarea {
-    line-height: 1.6;
-    min-height: 90px;
-  }
-
-  // === BOUTON SUBMIT ===
-  button[type="submit"] {
-    margin-top: 0.5rem;
-    width: 100%;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: $white;
-    background: linear-gradient(135deg, $azure-600, $azure-500);
-    border: none;
-    border-radius: $radius-full;
-    cursor: pointer;
-    letter-spacing: 0.01em;
-    box-shadow:
-      0 2px 8px rgba(2, 132, 199, 0.35),
-      0 1px 2px rgba(2, 132, 199, 0.2);
-    transition:
-      background $transition,
-      transform $transition,
-      box-shadow $transition,
-      opacity $transition;
-
-    &:hover:not(:disabled) {
-      background: linear-gradient(135deg, $azure-700, $azure-600);
-      transform: translateY(-1px);
-      box-shadow:
-        0 4px 16px rgba(2, 132, 199, 0.45),
-        0 2px 4px rgba(2, 132, 199, 0.25);
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 1px 4px rgba(2, 132, 199, 0.3);
-    }
-
-    &:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      background: $azure-300;
-      box-shadow: none;
+      box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
     }
   }
 }
 
-// === RESPONSIVE ===
-@media (max-width: 480px) {
+// Input spécifique pour la description
+input#description,
+input[name="description"],
+input[formControlName="description"] {
+  min-height: 120px;
+  padding: 12px 15px;
+  line-height: 1.5;
+  resize: vertical;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+
+  // Pour que le texte ne dépasse pas
+  &::placeholder {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+// Alternative : utiliser un div contenteditable si besoin de plus de flexibilité
+.description-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+
+  [contenteditable="true"] {
+    width: 100%;
+    min-height: 150px;
+    padding: 12px 15px;
+    border: 2px solid $border-color;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: $transition;
+    background: white;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    cursor: text;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.1);
+    }
+
+    &:empty:before {
+      content: attr(placeholder);
+      color: #999;
+    }
+  }
+}
+
+// Liste des types
+.types-list {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
   .card {
-    padding: 1.5rem 1.25rem;
-    border-radius: $radius-lg;
+    display: inline-block;
+    background: $background-light;
+    padding: 0;
+    margin: 0;
+    transition: $transition;
+    box-shadow: none;
+    border: 1px solid $border-color;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow;
+    }
+
+    h1 {
+      font-size: 0.9rem;
+      color: $text-color;
+      margin: 0;
+      padding: 8px 16px;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+// Bouton submit
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: $transition;
+  margin-top: 10px;
+
+  &:hover {
+    background: $primary-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  div {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 20px;
   }
 
   h1 {
     font-size: 1.5rem;
   }
+
+  img {
+    width: 120px;
+    height: 120px;
+  }
+
+  input {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  input#description,
+  input[formControlName="description"] {
+    min-height: 100px;
+  }
+
+  button[type="submit"] {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+// Animation au chargement
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out;
 }

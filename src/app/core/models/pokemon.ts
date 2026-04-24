@@ -1,10 +1,10 @@
-import { Type } from './type';
+import { PokemonType } from './pokemonType';
 
 export interface Pokemon {
   _id: string;
   name: string;
   description: string;
-  types: Type[];
+  types: PokemonType[];
   image: string;
 }
 

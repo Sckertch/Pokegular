@@ -17,6 +17,39 @@
       required
     />
 
+    <!-- Type 1 -->
+    <label for="name">Type 1</label>
+    <select id="type-select" formControlName="type1">
+      <option [value]="pokemon()?.types?.[0]" selected>{{ pokemon()?.types?.[0]?.name }}</option>
+
+      @for (type of types(); track type._id) {
+        <option [value]="type.name">{{ type.name }}</option>
+      }
+    </select>
+
+    <!-- Type 2 -->
+    <label for="name">Type 2</label>
+    <select id="type-select" formControlName="type2">
+      <option value="" disabled>-- Sélectionner --</option>
+
+      @for (type of types(); track type._id) {
+        <option [value]="type.name">{{ type.name }}</option>
+      }
+    </select>
+
+    <br>br
+    <!-- Type boucle test -->
+    <label for="name">Type boucle test</label>
+    @for (pokemonType  of pokemon()?.types; track pokemonType?._id; let i = $index) {
+      <label for="name">Type {{ i+1 }}</label>
+      <select id="type-select" formControlName="type{{ i+1 }}">
+        <option [value]="pokemonType.name">{{ pokemonType.name }}</option>
+        @for (type of types(); track type._id) {
+          <option [value]="type.name">{{ type.name }}</option>
+        }
+      </select>
+    }
+
     <!-- URL de l'image -->
     <label for="image">URL de l'image</label>
     <input
@@ -27,14 +60,17 @@
       formControlName="image"
     />
 
-    <!-- Description -->
-    <label for="description">Description</label>
-    <input
-      id="description"
-      name="description"
-      [value]="pokemon()?.description"
-      formControlName="description"
-    />
+    <div class="description-wrapper">
+      <label for="description">Description</label>
+      <div
+        id="description"
+        [contentEditable]="true"
+        (input)="updateDescription($event)"
+        class="editable-description"
+      >
+        {{pokemon()?.description}}
+      </div>
+    </div>
 
     <button type="submit">
       Enregistrer les modifications
