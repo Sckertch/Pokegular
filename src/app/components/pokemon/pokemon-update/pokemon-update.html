@@ -1,79 +1,74 @@
-<div class="">
-  <h1>Modifier un Pokémon</h1>
+@if (isLoaded()) {
+  <div class="">
+    <h1>Modifier un Pokémon</h1>
 
-  <form [formGroup]="pokeFormUpdate" (ngSubmit)="onSubmit()" #pokemonForm="ngForm" class="card">
+    <form [formGroup]="pokeFormUpdate" (ngSubmit)="onSubmit()" #pokemonForm="ngForm" class="card">
 
-    <!-- Image actuelle -->
-    <img [src]="pokemon()?.image" [alt]="pokemon()?.name">
+      <!-- Image actuelle -->
+      <img [src]="pokemon()?.image" [alt]="pokemon()?.name">
 
-    <!-- Nom -->
-    <label for="name">Nom</label>
-    <input
-      id="name"
-      name="name"
-      type="text"
-      [value]="pokemon()?.name"
-      formControlName="name"
-      required
-    />
+      <!-- Nom -->
+      <label for="name">Nom</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        [placeholder]="pokemon()?.name"
+        formControlName="name"
+        required
+      />
 
-    <!-- Type 1 -->
-    <label for="name">Type 1</label>
-    <select id="type-select" formControlName="type1">
-      <option [value]="pokemon()?.types?.[0]" selected>{{ pokemon()?.types?.[0]?.name }}</option>
+      <!-- Type -->
+      <label>Type</label>
+      <div formArrayName="types">
+        @for (i of range; track i;) {
+          <label>Type {{ i + 1 }}</label>
+          <select [formControlName]="i">
 
-      @for (type of types(); track type._id) {
-        <option [value]="type.name">{{ type.name }}</option>
-      }
-    </select>
-
-    <!-- Type 2 -->
-    <label for="name">Type 2</label>
-    <select id="type-select" formControlName="type2">
-      <option value="" disabled>-- Sélectionner --</option>
-
-      @for (type of types(); track type._id) {
-        <option [value]="type.name">{{ type.name }}</option>
-      }
-    </select>
-
-    <br>br
-    <!-- Type boucle test -->
-    <label for="name">Type boucle test</label>
-    @for (pokemonType  of pokemon()?.types; track pokemonType?._id; let i = $index) {
-      <label for="name">Type {{ i+1 }}</label>
-      <select id="type-select" formControlName="type{{ i+1 }}">
-        <option [value]="pokemonType.name">{{ pokemonType.name }}</option>
-        @for (type of types(); track type._id) {
-          <option [value]="type.name">{{ type.name }}</option>
+            @if (i === 1 && !this.pokemon()?.types?.[i]?.name) {
+              <option value="">Pas de second type</option>
+            } @else {
+              <option value="">{{ pokemon()?.types?.[i]?.name }}</option>
+              @if (i === 1) {
+                <option value="">Pas de second type</option>
+              }
+            }
+            @for (type of types(); track type._id) {
+              @if (type.name !== pokemon()?.types?.[i]?.name) {
+                <option [value]="type.name">{{ type.name }}</option>
+              }
+            }
+          </select>
         }
-      </select>
-    }
-
-    <!-- URL de l'image -->
-    <label for="image">URL de l'image</label>
-    <input
-      id="image"
-      name="image"
-      type="text"
-      [value]="pokemon()?.image"
-      formControlName="image"
-    />
-
-    <div class="description-wrapper">
-      <label for="description">Description</label>
-      <div
-        id="description"
-        [contentEditable]="true"
-        (input)="updateDescription($event)"
-        class="editable-description"
-      >
-        {{pokemon()?.description}}
       </div>
-    </div>
 
-    <button type="submit">
-      Enregistrer les modifications
-    </button>
-  </form>
-</div>
+      <!-- URL de l'image -->
+      <label for="image">URL de l'image</label>
+      <input
+        id="image"
+        name="image"
+        type="text"
+        [placeholder]="pokemon()?.image"
+        formControlName="image"
+      />
+
+      <div class="description-wrapper">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="editable-description"
+        >
+        </textarea>
+      </div>
+
+      <button type="submit">
+        Enregistrer les modifications
+      </button>
+    </form>
+  </div>
+} @else {
+  <p>Chargement</p>
+}
+
+

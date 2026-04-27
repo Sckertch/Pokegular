@@ -21,7 +21,7 @@ export class PokemonService {
     return this.http.get<ApiResponse<Pokemon>>(this.baseUrl + '/' + id);
   }
 
-  update(id: string, payload:PokemonPayload){
+  update(id: string, payload: Partial<PokemonPayload>){
     return this.http.patch<ApiResponse<Pokemon>>(this.baseUrl + '/' + id, payload);
   }
 }

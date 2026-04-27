@@ -12,4 +12,5 @@ export interface PokemonPayload {
   name: string;
   description: string;
   image: string;
+  types: string[];
 }
